@@ -1219,6 +1219,13 @@ CK_DEFINE_FUNCTION( CK_RV, C_SignInit )( CK_SESSION_HANDLE xSession,
 
         if( xResult == CKR_OK )
         {
+            /* Free the private key context if it exists.
+             * TODO: Check if the key is the same as was used previously. */
+            if( NULL != pxSession->xSignKey.pk_ctx )
+            {
+                mbedtls_pk_free( &pxSession->xSignKey );
+            }
+
             mbedtls_pk_init( &pxSession->xSignKey );
 
             if( 0 == mbedtls_pk_parse_key( &pxSession->xSignKey, keyData, ulKeyDataLength, NULL, 0 ) )
@@ -1341,6 +1348,13 @@ CK_DEFINE_FUNCTION( CK_RV, C_VerifyInit )( CK_SESSION_HANDLE xSession,
 
     if( xResult == CKR_OK )
     {
+        /* Free the public key context if it exists.
+         * TODO: Check if the key is the same as used by last verify operation. */
+        if( NULL != pxSession->xVerifyKey.pk_ctx )
+        {
+            mbedtls_pk_free( &pxSession->xVerifyKey );
+        }
+
         mbedtls_pk_init( &pxSession->xVerifyKey );
 
         if( 0 != mbedtls_pk_parse_public_key( &pxSession->xVerifyKey, keyData, ulKeyDataLength ) )
