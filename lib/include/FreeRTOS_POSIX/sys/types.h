@@ -1,5 +1,5 @@
 /*
- * Amazon FreeRTOS+POSIX V1.0.1
+ * Amazon FreeRTOS+POSIX V1.0.2
  * Copyright (C) 2018 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -108,7 +108,9 @@ typedef void                * pthread_barrierattr_t;
  * @brief Used to identify a mutex attribute object.
  */
 #if !defined( posixconfigENABLE_PTHREAD_MUTEXATTR_T ) || ( posixconfigENABLE_PTHREAD_MUTEXATTR_T == 1 )
-    typedef void            * pthread_mutexattr_t;
+    typedef struct pthread_mutexattr {
+          uint32_t        ulpthreadMutexAttrStorage;
+    } pthread_mutexattr_t;
 #endif
 
 /**
