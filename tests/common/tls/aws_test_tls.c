@@ -214,9 +214,9 @@ TEST( Full_TLS, AFQP_TLS_ConnectEC )
 
     /* Provision the device with P-256 elliptic curve key/certs. */
     xParams.ulClientPrivateKeyType = CKK_EC;
-    xParams.pcClientPrivateKey = ( uint8_t * ) tlstestCLIENT_PRIVATE_KEY_PEM_EC;
+    xParams.pucClientPrivateKey = ( uint8_t * ) tlstestCLIENT_PRIVATE_KEY_PEM_EC;
     xParams.ulClientPrivateKeyLength = tlstestCLIENT_PRIVATE_KEY_LENGTH_EC;
-    xParams.pcClientCertificate = ( uint8_t * ) tlstestCLIENT_CERTIFICATE_PEM_EC;
+    xParams.pucClientCertificate = ( uint8_t * ) tlstestCLIENT_CERTIFICATE_PEM_EC;
     xParams.ulClientCertificateLength = tlstestCLIENT_CERTIFICATE_LENGTH_EC;
 
     prvConnectWithProvisioning( &( xParams ),
@@ -231,9 +231,9 @@ TEST( Full_TLS, AFQP_TLS_ConnectMalformedCert )
 
     /* Provision the device with malformed client credential certificate. */
     xParams.ulClientPrivateKeyType = CKK_RSA;
-    xParams.pcClientPrivateKey = ( uint8_t * ) clientcredentialCLIENT_PRIVATE_KEY_PEM;
+    xParams.pucClientPrivateKey = ( uint8_t * ) clientcredentialCLIENT_PRIVATE_KEY_PEM;
     xParams.ulClientPrivateKeyLength = clientcredentialCLIENT_PRIVATE_KEY_LENGTH;
-    xParams.pcClientCertificate = ( uint8_t * ) tlstestCLIENT_CERTIFICATE_PEM_MALFORMED;
+    xParams.pucClientCertificate = ( uint8_t * ) tlstestCLIENT_CERTIFICATE_PEM_MALFORMED;
     xParams.ulClientCertificateLength = tlstestCLIENT_CERTIFICATE_PEM_MALFORMED_LENGTH;
 
     prvConnectWithProvisioning( &( xParams ),
@@ -248,9 +248,9 @@ TEST( Full_TLS, AFQP_TLS_ConnectUntrustedCert )
 
     /* Provision the device with malformed client credential certificate. */
     xParams.ulClientPrivateKeyType = CKK_RSA;
-    xParams.pcClientPrivateKey = ( uint8_t * ) tlstestCLIENT_UNTRUSTED_PRIVATE_KEY_PEM;
+    xParams.pucClientPrivateKey = ( uint8_t * ) tlstestCLIENT_UNTRUSTED_PRIVATE_KEY_PEM;
     xParams.ulClientPrivateKeyLength = tlstestCLIENT_UNTRUSTED_PRIVATE_KEY_PEM_LENGTH;
-    xParams.pcClientCertificate = ( uint8_t * ) tlstestCLIENT_UNTRUSTED_CERTIFICATE_PEM;
+    xParams.pucClientCertificate = ( uint8_t * ) tlstestCLIENT_UNTRUSTED_CERTIFICATE_PEM;
     xParams.ulClientCertificateLength = tlstestCLIENT_UNTRUSTED_CERTIFICATE_PEM_LENGTH;
 
     prvConnectWithProvisioning( &( xParams ),
@@ -265,9 +265,9 @@ TEST( Full_TLS, AFQP_TLS_ConnectBYOCCredentials )
 
     /* Provision the device with BYOC credentials. */
     xParams.ulClientPrivateKeyType = CKK_EC;
-    xParams.pcClientPrivateKey = ( uint8_t * ) tlstestCLIENT_BYOC_PRIVATE_KEY_PEM;
+    xParams.pucClientPrivateKey = ( uint8_t * ) tlstestCLIENT_BYOC_PRIVATE_KEY_PEM;
     xParams.ulClientPrivateKeyLength = tlstestCLIENT_BYOC_PRIVATE_KEY_PEM_LENGTH;
-    xParams.pcClientCertificate = ( uint8_t * ) tlstestCLIENT_BYOC_CERTIFICATE_PEM;
+    xParams.pucClientCertificate = ( uint8_t * ) tlstestCLIENT_BYOC_CERTIFICATE_PEM;
     xParams.ulClientCertificateLength = tlstestCLIENT_BYOC_CERTIFICATE_PEM_LENGTH;
 
     prvConnectWithProvisioning( &( xParams ),
