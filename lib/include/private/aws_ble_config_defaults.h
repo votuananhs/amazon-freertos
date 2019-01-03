@@ -166,8 +166,8 @@
 #define bleconfigCHAR_READ_PERM             eBTPermRead
 #define bleconfigCHAR_WRITE_PERM            eBTPermWrite
 #endif
-#define bleConfigENABLE_JSON_ENCODING           ( 1 )
+#define bleConfigENABLE_JSON_ENCODING           ( 0 )
 
-#define bleConfigENABLE_CBOR_ENCODING           ( 0 )
+#define bleConfigENABLE_CBOR_ENCODING           ( 1 )
 
 #endif /* _AWS_BLE_CONFIG_DEFAULTS_H_ */
