@@ -284,7 +284,10 @@ static size_t _getSerializedLength(
         case AWS_IOT_SERIALIZER_CONTAINER_STREAM:
             break;
         case AWS_IOT_SERIALIZER_SCALAR_TEXT_STRING:
-            return _jsonStringLength( pScalarData->value.stringLength );
+        {
+            size_t stringLength = ( pScalarData->value.stringLength == 0 ) ? strlen( ( const char * )pScalarData->value.pString ) : pScalarData->value.stringLength;
+            return _jsonStringLength( stringLength );
+        }
         case AWS_IOT_SERIALIZER_SCALAR_BYTE_STRING:
             return _jsonByteStringLength( pScalarData->value.stringLength );
         case AWS_IOT_SERIALIZER_SCALAR_SIGNED_INT:
