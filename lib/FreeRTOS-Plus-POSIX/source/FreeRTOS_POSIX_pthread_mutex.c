@@ -287,6 +287,10 @@ int pthread_mutex_unlock( pthread_mutex_t * mutex )
 
     if( iStatus == 0 )
     {
+        /* Enter the critical section so that
+         * mutex is unlocked AND owner is updated atomically */
+        taskENTER_CRITICAL();
+
         /* Call the correct FreeRTOS mutex unlock function based on mutex type. */
         if( pxMutex->xAttr.iType == PTHREAD_MUTEX_RECURSIVE )
         {
@@ -300,6 +304,9 @@ int pthread_mutex_unlock( pthread_mutex_t * mutex )
         /* Update the owner of the mutex. A recursive mutex may still have an
          * owner, so it should be updated with xSemaphoreGetMutexHolder. */
         pxMutex->xTaskOwner = xSemaphoreGetMutexHolder( ( SemaphoreHandle_t ) &pxMutex->xMutex );
+
+        /* Exit the critical section. */
+        taskEXIT_CRITICAL();
     }
 
     return iStatus;
