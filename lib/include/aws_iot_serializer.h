@@ -269,6 +269,9 @@ typedef struct AwsIotSerializerDecodeInterface
 
     /**
      * @brief Gets the object value currently pointed to by an iterator.
+     * if get() returns a container as the value object, user needs to explicitly destroy the container
+     * by calling destroy() on value object.
+     *
      * @param iterator The iterator handle
      * @param pValueObject Value of the object pointed to by the iterator.
      * @return AWS_IOT_SERIALIZER_SUCCESS if successful
@@ -280,6 +283,8 @@ typedef struct AwsIotSerializerDecodeInterface
 	 *
 	 * @brief Find an object by key within a container.
 	 * Container should always be of type MAP.
+	 * if find() returns a container as the value object, user needs to explicitly destroy the container
+	 * by calling destroy() on value object.
 	 *
 	 * @param[in] pDecoderObject Pointer to the decoder object representing  container
 	 * @param[in] pKey Pointer to the key for which value needs to be found.

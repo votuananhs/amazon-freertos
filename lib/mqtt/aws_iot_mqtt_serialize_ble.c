@@ -625,16 +625,6 @@ AwsIotMqttError_t AwsIotMqttBLE_SerializeConnect( const AwsIotMqttConnectInfo_t 
     *pConnectPacket = pBuffer;
     *pPacketSize = xBufLen;
 
-    configPRINTF(("CONNECT length %d\n", *pPacketSize ));
-    int x;
-    for( x = 0; x < xBufLen; x++ )
-    {
-        configPRINTF(("%x\n", pBuffer[x] ));
-     }
-
-
-
-
     return AWS_IOT_MQTT_SUCCESS;
 }
 
@@ -683,12 +673,11 @@ AwsIotMqttError_t AwsIotMqttBLE_DeserializeConnack( const uint8_t * const pConna
         xConnectionStatus = AWS_IOT_MQTT_SUCCESS;
     }
 
-    _MQTT_BLE_DECODER.destroy( &xValue );
     _MQTT_BLE_DECODER.destroy( &xDecoderObj );
 
     ( *pBytesProcessed ) = dataLength;
 
-	return xConnectionStatus;
+    return xConnectionStatus;
 }
 
 AwsIotMqttError_t AwsIotMqttBLE_SerializePublish( const AwsIotMqttPublishInfo_t * const pPublishInfo,
@@ -734,7 +723,7 @@ AwsIotMqttError_t AwsIotMqttBLE_SerializePublish( const AwsIotMqttPublishInfo_t 
     *pPacketSize = xBufLen;
     *pPacketIdentifier = usPacketIdentifier;
 
-	return AWS_IOT_MQTT_SUCCESS;
+    return AWS_IOT_MQTT_SUCCESS;
 }
 
 void AwsIotMqttBLE_PublishSetDup( bool awsIotMqttMode, uint8_t * const pPublishPacket, uint16_t * const pNewPacketIdentifier )
@@ -826,14 +815,13 @@ AwsIotMqttError_t AwsIotMqttBLE_DeserializePublish( const uint8_t * const pPubli
     	*pPacketIdentifier = ( uint16_t ) xValue.value.signedInt;
     }
 
-    _MQTT_BLE_DECODER.destroy( &xValue );
     _MQTT_BLE_DECODER.destroy( &xDecoderObj );
 
-	pOutput->retain = false;
+    pOutput->retain = false;
 
-	( *pBytesProcessed ) = dataLength;
+    ( *pBytesProcessed ) = dataLength;
 
-	return AWS_IOT_MQTT_SUCCESS;
+    return AWS_IOT_MQTT_SUCCESS;
 }
 
 AwsIotMqttError_t AwsIotMqttBLE_SerializePuback( uint16_t packetIdentifier,
@@ -915,7 +903,6 @@ AwsIotMqttError_t AwsIotMqttBLE_DeserializePuback( const uint8_t * const pPuback
     }
     *pPacketIdentifier = ( uint16_t ) xValue.value.signedInt;
 
-    _MQTT_BLE_DECODER.destroy( &xValue );
     _MQTT_BLE_DECODER.destroy( &xDecoderObj );
 
     ( *pBytesProcessed ) = dataLength;
@@ -1019,7 +1006,6 @@ AwsIotMqttError_t AwsIotMqttBLE_DeserializeSuback( AwsIotMqttConnection_t mqttCo
     }
     subscriptionStatus = ( uint16_t ) xValue.value.signedInt;
 
-    _MQTT_BLE_DECODER.destroy( &xValue );
     _MQTT_BLE_DECODER.destroy( &xDecoderObj );
 
     ( *pBytesProcessed ) = dataLength;
@@ -1138,7 +1124,6 @@ AwsIotMqttError_t AwsIotMqttBLE_DeserializeUnsuback( const uint8_t * const pUnsu
     }
     *pPacketIdentifier = ( uint16_t ) xValue.value.signedInt;
 
-    _MQTT_BLE_DECODER.destroy( &xValue );
     _MQTT_BLE_DECODER.destroy( &xDecoderObj );
 
     ( *pBytesProcessed ) = dataLength;
@@ -1216,10 +1201,9 @@ uint8_t AwsIotMqttBLE_GetPacketType( const uint8_t * const pPacket, size_t packe
     }
     packetType = ( uint16_t ) xValue.value.signedInt;
 
-    _MQTT_BLE_DECODER.destroy( &xValue );
     _MQTT_BLE_DECODER.destroy( &xDecoderObj );
 
-	return ( packetType << 4 );
+    return ( packetType << 4 );
 }
 
 AwsIotMqttError_t AwsIotMqttBLE_SerializePingreq( uint8_t ** const pPingreqPacket,
